@@ -23,7 +23,6 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: false,
 }));
-app.options('*', cors()); // Handle preflight for all routes
 
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
