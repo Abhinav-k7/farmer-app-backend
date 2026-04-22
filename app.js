@@ -16,8 +16,15 @@ const limiter = rateLimit({
 });
 app.use('/api', limiter);
 
-// Standard Middleware
-app.use(cors());
+// CORS — allow all origins (mobile app + Expo web dev + deployed frontends)
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: false,
+}));
+app.options('*', cors()); // Handle preflight for all routes
+
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 
